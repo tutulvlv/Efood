@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default">
+		<action name="login" class="userAction" method="login">
+			<result name="success">/index.jsp</result>
+			<result name="error">/index.jsp</result>
+		</action>
+		<action name="logout" class="userAction" method="logout">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="register" class="userAction" method="register">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="modifyUser" class="userAction" method="modifyUser">
+			<result name="success">/index.jsp</result>
+			<result name="userList" type="redirect">/admin/showUserList</result>
+		</action>
+
+
+		<action name="showCatalog" class="menuAction" method="showCatalog">
+		</action>
+		<action name="showRandomMenu" class="menuAction" method="showRandomMenu">
+		</action>
+		<action name="showMenuByCatalog" class="menuAction" method="showMenuByCatalog">
+			<result name="success">/user/menulist.jsp</result>
+		</action>
+		<action name="showMenuByName" class="menuAction" method="getMenuByName">
+			<result name="success">/user/menulist.jsp</result>
+		</action>
+		<action name="AutoComplete" class="menuAction" method="AutoComplete">
+		</action>
+		<action name="showMenuByPrice" class="menuAction" method="getMenuByPrice">
+			<result name="success">/user/menulist.jsp</result>
+		</action>
+		<action name="showMenuDetail" class="menuAction" method="showMenuDetail">
+			<result name="success">/user/menudetail.jsp</result>
+			<result name="menuList">/admin/modifyMenu.jsp</result>
+		</action>
+		<action name="showAllMenu" class="menuAction" method="showAllMenu">
+			<result name="success">/admin/menuList.jsp</result>
+		</action>
+		<action name="deleteMenu" class="menuAction" method="deleteMenu">
+			<result name="success" type="redirect">/admin/showAllMenu</result>
+		</action>
+		<action name="modifyMenu" class="menuAction" method="modifyMenu">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpeg,image/jpg
+				</param>
+				<param name="maximumSize">102400</param>
+			</interceptor-ref>
+			<!-- 默认的拦截器，必须要写 -->
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">/admin/showAllMenu</result>
+		</action>
+		<action name="addMenu" class="menuAction" method="addMenu">
+			<result name="success" type="redirect">/admin/showAllMenu</result>
+		</action>
+		<action name="addCatalog" class="menuAction" method="addCatalog">
+			<result name="success" type="redirect">/admin/catalogList.jsp</result>
+		</action>
+		<action name="modifyCatalog" class="menuAction" method="modifyCatalog">
+			<result name="success">/admin/catalogList.jsp</result>
+		</action>
+		<action name="deleteCatalog" class="menuAction" method="deleteCatalog">
+			<result name="success">/admin/catalogList.jsp</result>
+		</action>
+
+		
+		<action name="addToCart" class="shoppingAction" method="addToCart">
+			<result name="success">/user/cart.jsp</result>
+		</action>
+		<action name="updateCart" class="shoppingAction" method="updateCart">
+			<result name="success">/user/cart.jsp</result>
+		</action>
+		<action name="submitOrder" class="shoppingAction" method="submitOrder">
+			<result name="success">/user/ordersuccess.jsp</result>
+		</action>
+
+
+		<action name="showOrderList" class="orderAction" method="showOrderList">
+			<result name="success">/user/orderlist.jsp</result>
+		</action>
+		<action name="showOrderitem" class="orderAction" method="showOrderitem">
+			<result name="success">/user/orderitem.jsp</result>
+		</action>
+		<action name="saveComment" class="orderAction" method="saveComment">
+			<result name="success">/user/orderitem.jsp</result>
+		</action>
+
+
+		<action name="adminLogin" class="adminAction" method="adminLogin">
+			<result name="success">/admin/index.jsp</result>
+			<result name="error">/admin/login.jsp</result>
+		</action>
+		<action name="adminLogout" class="adminAction" method="adminLogout">
+			<result name="success">/admin/login.jsp</result>
+		</action>
+		<action name="showAdminList" class="adminAction" method="showAdminList">
+			<result name="success">/admin/adminList.jsp</result>
+		</action>
+		<action name="deleteAdmin" class="adminAction" method="deleteAdmin">
+			<result name="success" type="redirect">/admin/showAdminList</result>
+		</action>
+		<action name="addAdmin" class="adminAction" method="addAdmin">
+			<result name="success" type="redirect">/admin/showAdminList</result>
+		</action>
+		<action name="showAdmin" class="adminAction" method="showAdmin">
+			<result name="success">/admin/adminModify.jsp</result>
+		</action>
+		<action name="modifyAdmin" class="adminAction" method="modifyAdmin">
+			<result name="success" type="redirect">/admin/showAdminList</result>
+		</action>
+		<action name="showUserList" class="adminAction" method="showUserList">
+			<result name="success">/admin/userList.jsp</result>
+		</action>
+		<action name="showUser" class="adminAction" method="showUser">
+			<result name="success">/admin/userModify.jsp</result>
+		</action>
+		<action name="deleteUser" class="adminAction" method="deleteUser">
+			<result name="success" type="redirect">/admin/showUserList</result>
+		</action>
+		<action name="showPendingOrders" class="adminAction" method="showPendingOrders">
+			<result name="success">/admin/orderList.jsp</result>
+		</action>
+		<action name="showDoneOrders" class="adminAction" method="showDoneOrders">
+			<result name="success">/admin/orderList.jsp</result>
+		</action>
+		<action name="modifyOrderStatus" class="adminAction" method="modifyOrderStatus">
+			<result name="success" type="redirect">/admin/showPendingOrders</result>
+		</action>
+		<action name="deleteOrderitem" class="adminAction" method="deleteOrderitem">
+			<result name="success" type="redirect">/admin/showDoneOrders</result>
+		</action>
+	</package>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.ui.templateDir" value="template" />
+	<constant name="struts.ui.templateSuffix" value="ftl" />
+	<!-- 指定国际化资源文件的baseName为messageResource -->
+	<constant name="struts.custom.i18n.resources" value="messageResource"/>
+	<!-- 设置该应用使用的解码集 -->
+	<constant name="struts.i18n.encoding" value="utf-8"/>
+	<!-- 上传的全部图片的最大限制-->
+	<constant name="struts.multipart.maxSize" value="1024102400"/>
+</struts>

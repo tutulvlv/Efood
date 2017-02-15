@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://127.0.0.1:3306/efood">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="951357qaz"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>org/efood/vo/User.hbm.xml</value>
+				<value>org/efood/vo/Catalog.hbm.xml</value>
+				<value>org/efood/vo/Menu.hbm.xml</value>
+				<value>org/efood/vo/Orders.hbm.xml</value>
+				<value>org/efood/vo/Orderitem.hbm.xml</value>
+				<value>org/efood/vo/Admin.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="baseDAO" class="org.efood.dao.BaseDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="userDAO" class="org.efood.dao.impl.UserDAOImpl" parent="baseDAO"/>
+	<bean id="catalogDAO" class="org.efood.dao.impl.CatalogDAOImpl" parent="baseDAO"/>
+	<bean id="menuDAO" class="org.efood.dao.impl.MenuDAOImpl" parent="baseDAO"/>
+	<bean id="orderDAO" class="org.efood.dao.impl.OrderDAOImpl" parent="baseDAO"/>
+	<bean id="adminDAO" class="org.efood.dao.impl.AdminDAOImpl" parent="baseDAO"/>
+	<bean id="upload" class="org.efood.util.Upload"/>
+	
+	<bean id="userService" class="org.efood.service.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"/>
+	</bean>
+	<bean id="catalogService" class="org.efood.service.impl.CatalogServiceImpl">
+		<property name="catalogDAO" ref="catalogDAO"/>
+	</bean>
+	<bean id="menuService" class="org.efood.service.impl.MenuServiceImpl">
+		<property name="menuDAO" ref="menuDAO"/>
+	</bean>
+	<bean id="orderService" class="org.efood.service.impl.OrderServiceImpl">
+		<property name="orderDAO" ref="orderDAO"/>
+	</bean>
+	<bean id="adminService" class="org.efood.service.impl.AdminServiceImpl">
+		<property name="adminDAO" ref="adminDAO"/>
+	</bean>
+	
+	<bean id="userAction" class="org.efood.action.UserAction">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<bean id="menuAction" class="org.efood.action.MenuAction">
+		<property name="catalogService" ref="catalogService"/>
+		<property name="menuService" ref="menuService"/>
+		<property name="orderService" ref="orderService"/>
+		<property name="upload" ref="upload"/>
+	</bean>
+	<bean id="shoppingAction" class="org.efood.action.ShoppingAction">
+		<property name="menuService" ref="menuService"/>
+		<property name="orderService" ref="orderService"/>
+	</bean>
+	<bean id="orderAction" class="org.efood.action.OrderAction">
+		<property name="orderService" ref="orderService"/>
+	</bean>
+	<bean id="adminAction" class="org.efood.action.AdminAction">
+		<property name="adminService" ref="adminService"/>
+		<property name="userService" ref="userService"/>
+		<property name="orderService" ref="orderService"/>
+	</bean>
+</beans>

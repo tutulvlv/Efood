@@ -1,0 +1,23 @@
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{background-image:url(/static/css/about:blank);background-attachment:fixed}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+
+
+/*在线客服代码*/
+.rides-cs{background:#333;position:fixed;top:130px;left:1px;z-index:999;}
+*html .rides-cs{position:absolute;top:expression(eval(document.documentElement.scrollTop));margin:130px 0 0 0;}
+.rides-cs a{color:#00A0E9;}
+.rides-cs a:hover{color:#ff8100;text-decoration:none;}
+.rides-cs .floatL{width:36px;float:left;position:relative;z-index:1;}
+.rides-cs .floatL a{font-size:0;text-indent:-999em;display:block;}
+.rides-cs .floatR{width:130px;float:left;padding:5px;overflow:hidden;}
+.rides-cs .floatR .cn{background:#F7F7F7;}
+.rides-cs .cn h3{font-size:14px;color:#333;font-weight:600;line-height:24px;padding:5px}
+.rides-cs .cn ul{padding:0 0 0 8px;}
+.rides-cs .cn ul li{line-height:38px;height:38px;border-bottom:solid 1px #E6E4E4;overflow:hidden;}
+.rides-cs .cn ul li span{color:#777;}
+.rides-cs .cn ul li img{vertical-align:middle;}
+.rides-cs .btnOpen,.rides-cs .btnCtn{position:relative;z-index:9;top:0;left:0;background:url(../images/shopnc.png) no-repeat;display:block;width:30px;height:156px;overflow:hidden;padding:8px;}
+.rides-cs .btnOpen{background-position:8px 12px;}
+.rides-cs .btnCtn{background-position:-31px 12px;}
